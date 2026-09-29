@@ -13,16 +13,29 @@ def main():
     bg_img2 = pg.transform.flip(bg_img,True,False)#練習８：左右反転した背景画像Suface
     kk_img = pg.image.load("fig/3.png")#練習３：こうかとん画像Sufaceの作成
     kk_img = pg.transform.flip(kk_img,True,False)#練習３：こうかとん左右反転
+    kk_rct = kk_img.get_rect()#練習１０－１：こうかとんRectの取得
+    kk_rct.center = 300,200#練習１０－２：こうかとん初期座標
     tmr = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
+        key_lst = pg.key.get_pressed()#練習１０－３：キーの押下状態取得
+        if key_lst[pg.K_UP]:
+            kk_rct.move_ip(0,-1)
+        if key_lst[pg.K_DOWN]:
+            kk_rct.move_ip(0,+1)
+        if key_lst[pg.K_LEFT]:
+            kk_rct.move_ip(-1,0)
+        if key_lst[pg.K_RIGHT]:
+            kk_rct.move_ip(+1,0)
+
         x = tmr%3200#練習９：ループさせる
         screen.blit(bg_img, [-x, 0])#練習５：背景画像を右から左に
         screen.blit(bg_img2,[-x+1600,0])#練習７：2枚目の背景画像
         screen.blit(bg_img,[-x+3200,0])#練習９：３枚目の背景画像
-        screen.blit(kk_img,[300,200])#練習４：こうかとん画像Sufaceを貼り付け
+        screen.blit(kk_img,kk_rct)#練習４：こうかとん画像Sufaceを貼り付け
+
         pg.display.update()
         tmr += 1        
         clock.tick(200)#練習６：FPS変更
