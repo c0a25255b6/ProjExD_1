@@ -20,9 +20,8 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        a = 0
+        a = -1
         b = 0
-        kk_rct.move_ip(-1,0)
         key_lst = pg.key.get_pressed()#練習１０－３：キーの押下状態取得
         if key_lst[pg.K_UP]:
             b -= 1
